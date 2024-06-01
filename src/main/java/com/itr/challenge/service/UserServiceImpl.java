@@ -1,5 +1,6 @@
 package com.itr.challenge.service;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import com.itr.challenge.mapper.UserMapper;
 import com.itr.challenge.model.User;
 import com.itr.challenge.repository.PhoneRepository;
 import com.itr.challenge.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,17 +27,20 @@ public class UserServiceImpl implements UserService{
 
     private final PasswordEncoder passwordEncoder;
 
+
+    @Transactional
     public UserDto register(UserRequestDto userRequestDto) {
 
         User user = UserMapper.toUser(userRequestDto);
 
+        user.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
         user.setCreated(LocalDateTime.now());
         user.setModified(LocalDateTime.now());
         user.setLastLogin(LocalDateTime.now());
         user.setActive(true);
 
         UserDto userDto = UserMapper.toUserDto(userRepository.save(user));
-
+        userDto.setPhones(userRequestDto.getPhones());
         log.debug("----- User with id {} registered", userDto.getId());
 
         return userDto;
@@ -53,6 +58,7 @@ public class UserServiceImpl implements UserService{
         return users.stream().map(UserMapper::toUserDto).collect(Collectors.toList());
     }
 
+    @Transactional
     public UserDto updateUser(long userId, User newUser) {
 
         User user = userRepository.findById(userId).orElseThrow(
@@ -67,6 +73,7 @@ public class UserServiceImpl implements UserService{
         return UserMapper.toUserDto(user);
     }
 
+    @Transactional
     public void deleteUser(long userId) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException("User with id " + userId + "not found"));

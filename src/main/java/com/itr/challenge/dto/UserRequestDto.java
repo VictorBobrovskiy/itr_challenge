@@ -18,11 +18,11 @@ public class UserRequestDto {
     private String name;
 
     @Email(message = "Please provide a correct email")
-    @Size(min = 5, max = 254)
+    @Size(min = 5, max = 255)
     private String email;
 
     @NotBlank
-    @Size(min = 8)
+    @Size(min = 7, max = 255)
     private String password;
 
     @NotNull

@@ -47,7 +47,7 @@ public class User  {
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Transient
     private Set<Phone> phones = new HashSet<>();
 
 

@@ -16,10 +16,11 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-    private final DataSource dataSource;
+
+    private final UserDetailsService userDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -29,7 +30,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(
                         authorizeHttpRequests ->
                                 authorizeHttpRequests
-                                        .requestMatchers("login", "users/register", "error")
+                                        .requestMatchers("h2-console/*", "login", "users/register", "error")
                                         .permitAll()
                                         .anyRequest()
                                         .authenticated())
@@ -39,10 +40,6 @@ public class WebSecurityConfig {
         return httpSecurity.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsServiceJdbc() {
-        return new JdbcUserDetailsManager(dataSource);
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -17,15 +17,15 @@ import java.util.Set;
 public class UserDto {
 
     private long id;
-    private LocalDateTime created;
-    private LocalDateTime modified;
-    private LocalDateTime lastLogin;
+    private String created;
+    private String modified;
+    private String lastLogin;
     private String token;
     private boolean isActive;
     private List<PhoneDto> phones;
 
-    public UserDto(long id, LocalDateTime created, LocalDateTime modified,
-                   LocalDateTime lastLogin, String token, boolean isActive) {
+    public UserDto(long id, String created, String modified,
+                   String lastLogin, String token, boolean isActive) {
         this.id = id;
         this.created = created;
         this.modified = modified;

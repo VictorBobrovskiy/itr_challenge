@@ -24,11 +24,11 @@ public class PhoneDto {
 
     @NotBlank
     @Size(min = 1, max = 5)
-    private String cityCode;
+    private String citycode;
 
     @NotBlank
     @Size(min = 1, max = 5)
-    private String countryCode;
+    private String contrycode;
 
 
     @Override
@@ -36,20 +36,20 @@ public class PhoneDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PhoneDto phoneDto = (PhoneDto) o;
-        return Objects.equals(getNumber(), phoneDto.getNumber()) && Objects.equals(getCityCode(), phoneDto.getCityCode()) && Objects.equals(getCountryCode(), phoneDto.getCountryCode());
+        return Objects.equals(getNumber(), phoneDto.getNumber()) && Objects.equals(getCitycode(), phoneDto.getCitycode()) && Objects.equals(getContrycode(), phoneDto.getContrycode());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNumber(), getCityCode(), getCountryCode());
+        return Objects.hash(getNumber(), getCitycode(), getContrycode());
     }
 
     @Override
     public String toString() {
         return "PhoneDto{" +
                 "number='" + number + '\'' +
-                ", cityCode='" + cityCode + '\'' +
-                ", countryCode='" + countryCode + '\'' +
+                ", cityCode='" + citycode + '\'' +
+                ", countryCode='" + contrycode + '\'' +
                 '}';
     }
 }

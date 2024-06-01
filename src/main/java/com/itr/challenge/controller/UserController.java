@@ -4,6 +4,7 @@ import com.itr.challenge.dto.UserDto;
 import com.itr.challenge.dto.UserRequestDto;
 import com.itr.challenge.service.UserService;
 import com.itr.challenge.model.User;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody UserRequestDto userRequestDto) {
+    public ResponseEntity<UserDto> register(@Valid @RequestBody UserRequestDto userRequestDto) {
             UserDto createdUser = userService.register(userRequestDto);
             return ResponseEntity.status(201).body(createdUser);
 
