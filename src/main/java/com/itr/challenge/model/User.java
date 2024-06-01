@@ -1,10 +1,12 @@
 package com.itr.challenge.model;
 
 
+import com.itr.challenge.dto.PhoneDto;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity

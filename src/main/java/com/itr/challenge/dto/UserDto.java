@@ -3,7 +3,7 @@ package com.itr.challenge.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
+import java.util.Objects;
 
 public class UserDto {
 
@@ -11,7 +11,6 @@ public class UserDto {
     private LocalDateTime created;
     private LocalDateTime modified;
     private LocalDateTime lastLogin;
-
     private String token;
     private boolean isActive;
     private List<PhoneDto> phones;
@@ -28,6 +27,18 @@ public class UserDto {
                 ", phones=" + phones +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDto userDto = (UserDto) o;
+        return isActive == userDto.isActive && created.equals(userDto.created) && modified.equals(userDto.modified) && lastLogin.equals(userDto.lastLogin) && token.equals(userDto.token);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(created, modified, lastLogin, token, isActive);
+    }
 }
 
-}

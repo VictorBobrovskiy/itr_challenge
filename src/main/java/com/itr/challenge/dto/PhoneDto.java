@@ -1,36 +1,47 @@
 package com.itr.challenge.dto;
 
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
+
+import java.util.Objects;
+
+@Validated
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class PhoneDto {
 
+    @NotBlank
+    @Size(min = 5, max = 15)
     private String number;
+
+    @NotBlank
+    @Size(min = 1, max = 5)
     private String cityCode;
+
+    @NotBlank
+    @Size(min = 1, max = 5)
     private String countryCode;
 
-    // Getters and Setters
 
-    public String getNumber() {
-        return number;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PhoneDto phoneDto = (PhoneDto) o;
+        return Objects.equals(getNumber(), phoneDto.getNumber()) && Objects.equals(getCityCode(), phoneDto.getCityCode()) && Objects.equals(getCountryCode(), phoneDto.getCountryCode());
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getCityCode() {
-        return cityCode;
-    }
-
-    public void setCityCode(String cityCode) {
-        this.cityCode = cityCode;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNumber(), getCityCode(), getCountryCode());
     }
 
     @Override
@@ -41,4 +52,5 @@ public class PhoneDto {
                 ", countryCode='" + countryCode + '\'' +
                 '}';
     }
+}
 
