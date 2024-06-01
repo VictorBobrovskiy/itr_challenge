@@ -1,10 +1,19 @@
 package com.itr.challenge.dto;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+@NoArgsConstructor
+@Setter
+@Getter
 public class UserDto {
 
     private long id;
@@ -15,6 +24,15 @@ public class UserDto {
     private boolean isActive;
     private List<PhoneDto> phones;
 
+    public UserDto(long id, LocalDateTime created, LocalDateTime modified,
+                   LocalDateTime lastLogin, String token, boolean isActive) {
+        this.id = id;
+        this.created = created;
+        this.modified = modified;
+        this.lastLogin = lastLogin;
+        this.token = token;
+        this.isActive = isActive;
+    }
 
     @Override
     public String toString() {
@@ -33,7 +51,12 @@ public class UserDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDto userDto = (UserDto) o;
-        return isActive == userDto.isActive && created.equals(userDto.created) && modified.equals(userDto.modified) && lastLogin.equals(userDto.lastLogin) && token.equals(userDto.token);
+        return isActive == userDto.isActive &&
+                Objects.equals(created, userDto.created) &&
+                Objects.equals(modified, userDto.modified) &&
+                Objects.equals(lastLogin, userDto.lastLogin) &&
+                Objects.equals(token, userDto.token) &&
+                Objects.equals(phones, userDto.phones);
     }
 
     @Override

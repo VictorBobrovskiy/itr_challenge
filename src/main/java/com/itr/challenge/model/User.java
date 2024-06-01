@@ -6,8 +6,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -45,15 +47,22 @@ public class User  {
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Phone> phones = new HashSet<>();
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return isActive == user.isActive && name.equals(user.name) && email.equals(user.email) &&
-                password.equals(user.password) && created.equals(user.created) && modified.equals(user.modified) &&
-                lastLogin.equals(user.lastLogin);
-
+        return isActive() == user.isActive() &&
+                Objects.equals(getName(), user.getName()) &&
+                Objects.equals(getEmail(), user.getEmail()) &&
+                Objects.equals(getPassword(), user.getPassword()) &&
+                Objects.equals(getCreated(), user.getCreated()) &&
+                Objects.equals(getModified(), user.getModified()) &&
+                Objects.equals(getLastLogin(), user.getLastLogin());
     }
 
     @Override

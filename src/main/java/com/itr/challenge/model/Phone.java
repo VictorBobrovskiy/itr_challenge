@@ -1,7 +1,14 @@
 package com.itr.challenge.model;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 
+@Entity
+@Table(name = "phones")
+@Getter
+@Setter
 public class Phone {
 
     @Id
@@ -36,11 +43,13 @@ public class Phone {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Phone phone = (Phone) o;
-        return Objects.equals(number, phone.number) && Objects.equals(cityCode, phone.cityCode) && Objects.equals(countryCode, phone.countryCode) && Objects.equals(user, phone.user);
+        return Objects.equals(number, phone.number) &&
+               Objects.equals(cityCode, phone.cityCode) &&
+               Objects.equals(countryCode, phone.countryCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, cityCode, countryCode, user);
+        return Objects.hash(number, cityCode, countryCode);
     }
 }
