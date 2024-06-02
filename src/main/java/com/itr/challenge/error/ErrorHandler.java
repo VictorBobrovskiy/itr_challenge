@@ -5,7 +5,6 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,7 +14,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.time.LocalDateTime;
 
 
 @RestControllerAdvice

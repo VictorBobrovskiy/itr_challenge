@@ -1,6 +1,5 @@
 package com.itr.challenge.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itr.challenge.dto.UserDto;
 import com.itr.challenge.dto.UserRequestDto;
 import com.itr.challenge.error.UserNotFoundException;
@@ -11,7 +10,6 @@ import com.itr.challenge.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -23,12 +21,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -130,16 +125,15 @@ class UserControllerTest {
     }
 
 
-
     @Test
     void testUpdateUserNotFound() throws Exception {
         when(userService.updateUser(anyLong(), any(UserRequestDto.class))).thenThrow(new UserNotFoundException("User with id 2 not found"));
 
         mockMvc.perform(put("/users/{id}", 2L, userRequestDto)
                         .contentType(MediaType.APPLICATION_JSON)
-                         .content("{ \"name\": \"John Doe Updated\", \"email\": \"john.doe.updated@example.com\", \"password\": \"newpassword\", \"phones\": [] }"))
-                        .andExpect(status().isNotFound())
-                        .andExpect(content().json("{\"mensaje\": \"User with id 2 not found\"}"));
+                        .content("{ \"name\": \"John Doe Updated\", \"email\": \"john.doe.updated@example.com\", \"password\": \"newpassword\", \"phones\": [] }"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().json("{\"mensaje\": \"User with id 2 not found\"}"));
 
         verify(userService, times(1)).updateUser(anyLong(), any(UserRequestDto.class));
     }
@@ -166,6 +160,7 @@ class UserControllerTest {
 
         verify(userService, times(1)).deleteUser(anyLong());
     }
+
     @Test
     void testUpdateUser() throws Exception {
         when(userService.updateUser(1L, userRequestDto)).thenReturn(userDto);

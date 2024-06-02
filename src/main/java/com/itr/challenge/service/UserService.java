@@ -2,10 +2,8 @@ package com.itr.challenge.service;
 
 import com.itr.challenge.dto.UserDto;
 import com.itr.challenge.dto.UserRequestDto;
-import com.itr.challenge.model.User;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface UserService {
 

@@ -3,6 +3,8 @@ package com.itr.challenge.controller;
 import com.itr.challenge.dto.UserDto;
 import com.itr.challenge.dto.UserRequestDto;
 import com.itr.challenge.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,11 +17,13 @@ import java.util.List;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 @Slf4j
+@Api("API para operaciones CRUD con usarios")
 public class UserController {
 
     private final UserService userService;
 
     @PostMapping("/register")
+    @ApiOperation(value = "Registrar nuevos usarios")
     public ResponseEntity<UserDto> register(@Valid @RequestBody UserRequestDto userRequestDto) {
 
         UserDto createdUser = userService.register(userRequestDto);
@@ -30,6 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation(value = "Encontrar usario con su id")
     public ResponseEntity<UserDto> getUserById(@PathVariable long id) {
 
         log.debug("----- Request for user with id {} received", id);
@@ -38,6 +43,7 @@ public class UserController {
     }
 
     @GetMapping
+    @ApiOperation(value = "Encontrar todos los usarios")
     public ResponseEntity<List<UserDto>> getAllUsers() {
 
         log.debug("----- Request for all users received");
@@ -46,6 +52,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value = "Actualizar usario con su id")
     public ResponseEntity<UserDto> updateUser(@PathVariable long id, @RequestBody UserRequestDto userDetails) {
 
         log.debug("----- Update request for user with id {} received", id);
@@ -55,6 +62,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Eliminar usario con su id")
     public ResponseEntity<?> deleteUser(@PathVariable long id) {
 
         userService.deleteUser(id);

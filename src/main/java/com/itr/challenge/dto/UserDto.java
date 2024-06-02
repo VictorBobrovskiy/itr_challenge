@@ -1,25 +1,40 @@
 package com.itr.challenge.dto;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @NoArgsConstructor
 @Setter
 @Getter
+@ApiModel(description = "Usario creado")
 public class UserDto {
 
+    @ApiModelProperty(notes = "Id del usario")
     private long id;
+
+    @ApiModelProperty(notes = "Tiempo de creacion")
     private String created;
+
+    @ApiModelProperty(notes = "Tiempo de modificacion")
     private String modified;
+
+    @ApiModelProperty(notes = "Tiempo de último ingreso")
     private String lastLogin;
+
+    @ApiModelProperty(notes = "Token JWT")
     private String token;
+
+    @ApiModelProperty(notes = "Dice si el usario esta activo")
     private boolean isActive;
+
+    @ApiModelProperty(notes = "Lista del telefonos")
     private List<PhoneDto> phones;
 
     public UserDto(long id, String created, String modified,

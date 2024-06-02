@@ -1,6 +1,8 @@
 package com.itr.challenge.dto;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -15,18 +17,22 @@ import java.util.Objects;
 @AllArgsConstructor
 @Getter
 @Setter
+@ApiModel(description = "Telefonos")
 public class PhoneDto {
 
     @NotBlank
     @Size(min = 5, max = 15)
+    @ApiModelProperty(notes = "Numero del telefono")
     private String number;
 
     @NotBlank
     @Size(min = 1, max = 5)
+    @ApiModelProperty(notes = "El codigo del area")
     private String citycode;
 
     @NotBlank
     @Size(min = 1, max = 5)
+    @ApiModelProperty(notes = "El codigo del pais")
     private String contrycode;
 
 

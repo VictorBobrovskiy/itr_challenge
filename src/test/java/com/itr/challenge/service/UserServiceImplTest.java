@@ -1,10 +1,9 @@
 package com.itr.challenge.service;
+
 import com.itr.challenge.dto.UserDto;
 import com.itr.challenge.dto.UserRequestDto;
 import com.itr.challenge.error.UserExistsException;
 import com.itr.challenge.error.UserNotFoundException;
-import com.itr.challenge.mapper.UserMapper;
-import com.itr.challenge.model.Phone;
 import com.itr.challenge.model.User;
 import com.itr.challenge.repository.PhoneRepository;
 import com.itr.challenge.repository.UserRepository;
@@ -14,16 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
