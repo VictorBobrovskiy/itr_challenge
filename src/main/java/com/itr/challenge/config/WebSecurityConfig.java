@@ -1,5 +1,6 @@
-package com.itr.challenge.security;
+package com.itr.challenge.config;
 
+import com.itr.challenge.security.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

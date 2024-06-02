@@ -50,10 +50,10 @@ public class JwtUtil {
 
     public String validateTokenAndRetrieveClaim(String token) throws JWTVerificationException {
 
-            DecodedJWT jwt = verifier.verify(token);
+        DecodedJWT jwt = verifier.verify(token);
 
-            log.debug("JWT Token verified successfully");
+        log.debug("JWT Token verified successfully");
 
-            return jwt.getClaim("username").asString();
+        return jwt.getClaim("username").asString();
     }
 }

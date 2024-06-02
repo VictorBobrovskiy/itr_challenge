@@ -13,7 +13,6 @@ import com.itr.challenge.security.JwtUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -84,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
     public List<UserDto> getAllUsers() {
 
-        List<User> users = userRepository.findAll(Pageable.ofSize(10)).toList();
+        List<User> users = userRepository.findAll();
 
         return users.stream().map(UserMapper::toUserDto).collect(Collectors.toList());
     }

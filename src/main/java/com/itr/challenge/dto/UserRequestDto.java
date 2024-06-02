@@ -2,7 +2,10 @@ package com.itr.challenge.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -27,7 +30,7 @@ public class UserRequestDto {
     @NotBlank
     @Size(min = 7, max = 255)
     @ApiModelProperty(notes = "Contrasena")
-    @Pattern(regexp ="^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{7,}$",
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{7,}$",
             message = "Password must contain at least one digit and one special character")
     private String password;
 

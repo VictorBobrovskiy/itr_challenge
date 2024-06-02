@@ -81,7 +81,7 @@ class UserControllerTest {
 
         mockMvc.perform(post("/users/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{ \"name\": \"John Doe\", \"email\": \"john.doe@example.com\", \"password\": \"password\", \"phones\": [] }"))
+                        .content("{ \"name\": \"John Doe\", \"email\": \"john.doe@example.com\", \"password\": \"password1\", \"phones\": [] }"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.token").value("token"));
 
