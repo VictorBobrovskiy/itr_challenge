@@ -14,7 +14,7 @@ import java.util.UUID;
 @Getter
 public class UserDto {
 
-    private UUID id;
+    private long id;
     private String created;
     private String modified;
     private String lastLogin;
@@ -22,7 +22,7 @@ public class UserDto {
     private boolean isActive;
     private List<PhoneDto> phones;
 
-    public UserDto(UUID id, String created, String modified,
+    public UserDto(long id, String created, String modified,
                    String lastLogin, String token, boolean isActive) {
         this.id = id;
         this.created = created;

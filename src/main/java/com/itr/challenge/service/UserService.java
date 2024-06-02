@@ -9,13 +9,13 @@ import java.util.UUID;
 
 public interface UserService {
 
-    UserDto getUserById(UUID id);
+    UserDto getUserById(long id);
 
     UserDto register(UserRequestDto userRequestDto);
 
     List<UserDto> getAllUsers();
 
-    void deleteUser(UUID id);
+    void deleteUser(long id);
 
-    UserDto updateUser(UUID ig, UserRequestDto newUser);
+    UserDto updateUser(long ig, UserRequestDto newUser);
 }
