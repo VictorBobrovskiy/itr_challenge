@@ -5,17 +5,16 @@ import com.itr.challenge.dto.UserRequestDto;
 import com.itr.challenge.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 
     UserDto getUserById(long id);
 
-    UserDto register (UserRequestDto userRequestDto);
+    UserDto register(UserRequestDto userRequestDto);
 
     List<UserDto> getAllUsers();
 
     void deleteUser(long id);
 
-    UserDto updateUser(long ig, User newUser);
+    UserDto updateUser(long ig, UserRequestDto newUser);
 }

@@ -1,13 +1,14 @@
 package com.itr.challenge.model;
 
 
-import com.itr.challenge.dto.PhoneDto;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-public class User  {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,7 +48,7 @@ public class User  {
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
-    @Transient
+    @OneToMany(mappedBy = "user")
     private Set<Phone> phones = new HashSet<>();
 
 
@@ -60,14 +61,12 @@ public class User  {
                 Objects.equals(getName(), user.getName()) &&
                 Objects.equals(getEmail(), user.getEmail()) &&
                 Objects.equals(getPassword(), user.getPassword()) &&
-                Objects.equals(getCreated(), user.getCreated()) &&
-                Objects.equals(getModified(), user.getModified()) &&
-                Objects.equals(getLastLogin(), user.getLastLogin());
+                Objects.equals(getCreated(), user.getCreated());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, email, password, created, modified, lastLogin, isActive);
+        return Objects.hash(email);
     }
 
     @Override

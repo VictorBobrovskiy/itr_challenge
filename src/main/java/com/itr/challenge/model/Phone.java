@@ -1,4 +1,5 @@
 package com.itr.challenge.model;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,8 +45,8 @@ public class Phone {
         if (o == null || getClass() != o.getClass()) return false;
         Phone phone = (Phone) o;
         return Objects.equals(number, phone.number) &&
-               Objects.equals(cityCode, phone.cityCode) &&
-               Objects.equals(countryCode, phone.countryCode);
+                Objects.equals(cityCode, phone.cityCode) &&
+                Objects.equals(countryCode, phone.countryCode);
     }
 
     @Override

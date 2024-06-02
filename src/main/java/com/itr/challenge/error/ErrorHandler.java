@@ -2,7 +2,10 @@ package com.itr.challenge.error;
 
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +15,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.LocalDateTime;
 
 
 @RestControllerAdvice
@@ -19,10 +23,9 @@ import java.io.StringWriter;
 public class ErrorHandler {
 
     @ExceptionHandler({
-            ConstraintViolationException.class, ValidationException.class,
+            ConstraintViolationException.class,
             MethodArgumentNotValidException.class, IllegalArgumentException.class,
             MethodArgumentTypeMismatchException.class, MissingServletRequestParameterException.class,
-            IllegalStateException.class
     })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidation(final Exception e) {
@@ -41,6 +44,28 @@ public class ErrorHandler {
         return new ErrorResponse(e.getMessage());
     }
 
+    @ExceptionHandler({
+            UserExistsException.class,
+            DataIntegrityViolationException.class
+    })
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleConflicts(final Exception e) {
+
+        log.error("----- Error " + e.getClass() + " caused CONFLICT status");
+
+        return new ErrorResponse(e.getMessage());
+    }
+
+    @ExceptionHandler({
+            AccessDeniedException.class
+    })
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorResponse handleAccess(final Exception e) {
+
+        log.error("----- Error " + e.getClass() + " caused CONFLICT status");
+
+        return new ErrorResponse(e.getMessage());
+    }
 
 
     @ExceptionHandler

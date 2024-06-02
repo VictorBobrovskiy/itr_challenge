@@ -2,16 +2,14 @@ package com.itr.challenge.controller;
 
 import com.itr.challenge.dto.UserDto;
 import com.itr.challenge.dto.UserRequestDto;
-import com.itr.challenge.service.UserService;
 import com.itr.challenge.model.User;
+import com.itr.challenge.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -22,14 +20,14 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@Valid @RequestBody UserRequestDto userRequestDto) {
-            UserDto createdUser = userService.register(userRequestDto);
-            return ResponseEntity.status(201).body(createdUser);
+        UserDto createdUser = userService.register(userRequestDto);
+        return ResponseEntity.status(201).body(createdUser);
 
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
-            return ResponseEntity.ok(userService.getUserById(id));
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @GetMapping
@@ -38,8 +36,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
-         return ResponseEntity.ok(userService.updateUser(id, userDetails));
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserRequestDto userDetails) {
+        return ResponseEntity.ok(userService.updateUser(id, userDetails));
 
     }
 

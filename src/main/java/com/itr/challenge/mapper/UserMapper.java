@@ -9,12 +9,12 @@ import com.itr.challenge.model.User;
 import lombok.experimental.UtilityClass;
 
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 @UtilityClass
 public class UserMapper {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
 
 
     public static UserDto toUserDto(User user) {
@@ -25,6 +25,7 @@ public class UserMapper {
         userDto.setLastLogin(FORMATTER.format(user.getLastLogin()));
         userDto.setToken(user.getToken());
         userDto.setActive(user.isActive());
+        userDto.setPhones(user.getPhones().stream().map(UserMapper::toPhoneDto).collect(Collectors.toList()));
         return userDto;
     }
 
@@ -32,10 +33,11 @@ public class UserMapper {
         User user = new User();
         user.setName(userRequestDto.getName());
         user.setEmail(userRequestDto.getEmail());
+        user.setPhones(userRequestDto.getPhones().stream().map(UserMapper::toPhone).collect(Collectors.toSet()));
         return user;
     }
 
-    private static PhoneDto toPhoneDto(Phone phone) {
+    public static PhoneDto toPhoneDto(Phone phone) {
         PhoneDto phoneDto = new PhoneDto();
         phoneDto.setNumber(phone.getNumber());
         phoneDto.setCitycode(phone.getCityCode());
@@ -43,7 +45,7 @@ public class UserMapper {
         return phoneDto;
     }
 
-    private static Phone toPhone(PhoneDto phoneDto) {
+    public static Phone toPhone(PhoneDto phoneDto) {
         Phone phone = new Phone();
         phone.setNumber(phoneDto.getNumber());
         phone.setCityCode(phoneDto.getCitycode());

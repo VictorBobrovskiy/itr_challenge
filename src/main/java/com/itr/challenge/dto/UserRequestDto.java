@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
+import java.util.Set;
 
-@Validated
+
 @Getter
 public class UserRequestDto {
 
@@ -26,7 +26,7 @@ public class UserRequestDto {
     private String password;
 
     @NotNull
-    private List<PhoneDto> phones;
+    private Set<PhoneDto> phones;
 
     @Override
     public String toString() {
