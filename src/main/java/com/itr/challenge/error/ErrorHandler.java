@@ -1,5 +1,9 @@
 package com.itr.challenge.error;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -50,6 +54,18 @@ public class ErrorHandler {
     public ErrorResponse handleConflicts(final Exception e) {
 
         log.error("----- Error " + e.getClass() + " caused CONFLICT status");
+
+        return new ErrorResponse(e.getMessage());
+    }
+
+    @ExceptionHandler({
+            TokenExpiredException.class, SignatureVerificationException.class,
+            JWTDecodeException.class, JWTVerificationException.class
+    })
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponse handleJwt(final Exception e) {
+
+        log.error("----- Error " + e.getClass() + " caused UNAUTHORIZED status");
 
         return new ErrorResponse(e.getMessage());
     }

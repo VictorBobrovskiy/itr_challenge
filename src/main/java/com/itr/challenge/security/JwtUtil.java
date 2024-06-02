@@ -49,17 +49,11 @@ public class JwtUtil {
     }
 
     public String validateTokenAndRetrieveClaim(String token) throws JWTVerificationException {
-        try {
+
             DecodedJWT jwt = verifier.verify(token);
 
             log.debug("JWT Token verified successfully");
 
             return jwt.getClaim("username").asString();
-
-        } catch (JWTVerificationException e) {
-
-            log.error("JWT verification failed: " + e.getMessage());
-            throw e;
-        }
     }
 }
