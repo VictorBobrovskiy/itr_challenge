@@ -62,7 +62,7 @@ public class ErrorHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ErrorResponse handleAccess(final Exception e) {
 
-        log.error("----- Error " + e.getClass() + " caused CONFLICT status");
+        log.error("----- Error " + e.getClass() + " caused FORBIDDEN status");
 
         return new ErrorResponse(e.getMessage());
     }

@@ -13,6 +13,8 @@ import com.itr.challenge.security.JwtUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 
@@ -41,9 +42,9 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public UserDto register(UserRequestDto userRequestDto) {
-        
+
         Optional<User> existingUser = userRepository.findByEmail(userRequestDto.getEmail());
-        
+
         if (existingUser.isPresent()) {
             throw new UserExistsException("El correo ya registrado");
         }
@@ -84,7 +85,7 @@ public class UserServiceImpl implements UserService {
 
     public List<UserDto> getAllUsers() {
 
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepository.findAll(Pageable.ofSize(10)).toList();
 
         return users.stream().map(UserMapper::toUserDto).collect(Collectors.toList());
     }

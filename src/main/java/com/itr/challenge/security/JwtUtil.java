@@ -31,22 +31,33 @@ public class JwtUtil {
     }
 
     public String generateToken(String username) {
+
         Date expirationDate = Date.from(ZonedDateTime.now().plusMinutes(30).toInstant());
 
-        return JWT.create()
+        String token = JWT.create()
                 .withSubject("User details")
                 .withClaim("username", username)
                 .withIssuedAt(new Date())
                 .withIssuer("itr")
                 .withExpiresAt(expirationDate)
                 .sign(algorithm);
+
+        log.debug("JWT Token generated successfully");
+
+        return token;
+
     }
 
     public String validateTokenAndRetrieveClaim(String token) throws JWTVerificationException {
         try {
             DecodedJWT jwt = verifier.verify(token);
+
+            log.debug("JWT Token verified successfully");
+
             return jwt.getClaim("username").asString();
+
         } catch (JWTVerificationException e) {
+
             log.error("JWT verification failed: " + e.getMessage());
             throw e;
         }
