@@ -7,13 +7,14 @@ import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Setter
 @Getter
 public class UserDto {
 
-    private long id;
+    private UUID id;
     private String created;
     private String modified;
     private String lastLogin;
@@ -21,7 +22,7 @@ public class UserDto {
     private boolean isActive;
     private List<PhoneDto> phones;
 
-    public UserDto(long id, String created, String modified,
+    public UserDto(UUID id, String created, String modified,
                    String lastLogin, String token, boolean isActive) {
         this.id = id;
         this.created = created;

@@ -51,6 +51,6 @@ public class Phone {
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, cityCode, countryCode);
+        return 31 * Objects.hash(number, cityCode, countryCode);
     }
 }

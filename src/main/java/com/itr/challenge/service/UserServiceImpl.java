@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 
@@ -71,7 +72,7 @@ public class UserServiceImpl implements UserService {
         return UserMapper.toUserDto(savedUser);
     }
 
-    public UserDto getUserById(long userId) {
+    public UserDto getUserById(UUID userId) {
 
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException("User with id " + userId + "not found"));
@@ -89,7 +90,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public UserDto updateUser(long userId, UserRequestDto newUser) {
+    public UserDto updateUser(UUID userId, UserRequestDto newUser) {
 
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException("User with id " + userId + "not found"));
@@ -107,7 +108,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void deleteUser(long userId) {
+    public void deleteUser(UUID userId) {
 
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException("User with id " + userId + "not found"));

@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -22,7 +23,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private UUID id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -66,7 +67,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(email);
+        return 31 * Objects.hash(email);
     }
 
     @Override
